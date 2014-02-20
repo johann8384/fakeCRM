@@ -623,13 +623,11 @@ def randompassword():
   size = random.randint(8, 12)
   return ''.join(random.choice(chars) for x in range(size))
 
-
 def ipv4():
   """
   Convert 32-bit integer to dotted IPv4 address.
   """
   return ".".join(map(lambda n: str(random.randint(171048960, 171065342) >> n & 0xFF), [24, 16, 8, 0]))
-
 
 def generateDevice(typeGroup):
   global deviceid;
@@ -687,6 +685,16 @@ def generateTicket():
 
   return ticket;
 
+def generateContact():
+  global contactid
+  password = randompassword();
+  first = f.first_name();
+  last = f.last_name();
+  username = first[0].lower() + last.lower();
+  contactid = contactid + 1;
+  contact = {'contactID': contactid, 'clientID': clientid, 'name': first + ' ' + last, 'username': username,
+	     'email': username + '@' + domain, 'phone': f.phone_number(), 'password': password}
+  return contact;
 
 contacts = []
 clients = []
@@ -707,16 +715,11 @@ for i in range(560):
   clientid = clientid + 1
 
   for t in range(randrange(1, 9)):
-    password = randompassword();
-    first = f.first_name();
-    last = f.last_name();
-    username = first[0].lower() + last.lower();
-    contactid = contactid + 1;
-    contact = {'contactID': contactid, 'clientID': clientid, 'name': first + ' ' + last, 'username': username,
-               'email': username + '@' + domain, 'phone': f.phone_number(), 'password': password}
-    contacts.append(contact)
+    contact = generateContact();
+    contacts.append(contact);
     companyContacts.append(
-      {'contactID': contactid, 'name': first + ' ' + last, 'username': username, 'email': username + '@' + domain})
+      {'contactID': contact['contactID'], 'name': contact['name'], 'username': contact['username'], 'email': contact['email']}
+    );
 
   for t in range(randrange(1, 4)):
     device = generateDevice(deviceTypeBGroups);
