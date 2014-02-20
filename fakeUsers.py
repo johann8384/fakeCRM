@@ -148,6 +148,7 @@ for i in range(560):
   domain = company.split(' ')[0].strip(',').lower() + '.' + f.domain_name().split('.')[1]
   shortname = company.split(' ')[0].strip(',').lower()
   companyContacts = []
+  companyDevices = []
 
   for eachLetter in shortname:
         if eachLetter in ['a','e','i','o','u', '-']:
@@ -176,15 +177,27 @@ for i in range(560):
     typeGroup = random.choice(deviceTypeAGroups);
     name = random.choice(typeGroup['names']);
     deviceid = deviceid + 1;
-    device = {'deviceID': deviceid, 'clientID': clientid, 'shortname': shortname, 'domain': domain, 'typeGroupID': typeGroup['devtype_group_id'],  'typeGroupName': typeGroup['name'], 'ipAddr': ipv4(), 'name': shortname + '-' + name + "{0:03d}".format(t+1)}
+    ipaddr = ipv4()
+    device = {'deviceID': deviceid, 'clientID': clientid, 'shortname': shortname, 'domain': domain, 'typeGroupID': typeGroup['devtype_group_id'],  'typeGroupName': typeGroup['name'], 'ipAddr': ipaddr, 'name': shortname + '-' + name + "{0:03d}".format(t+1)}
+    companyDevices.append({'deviceID': deviceid, 'name': shortname + '-' + name + "{0:03d}".format(t+1), 'domain': domain, 'ipAddr': ipaddr });
     devices.append(device)
 
   if random.choice([True, False]) == True:
     for t in range(randrange(0,2)):
+      ticketContacts = [];
       ticketid = ticketid + 1;
-      ticketText = "Thank you for being so " + random.choice(adjList).lower() + ". Please " + f.bs().lower() + " on my " + random.choice(itemList).lower() + " because I can't use the " + f.catch_phrase().lower() + " while the " + random.choice(itemList).lower() + " is " + random.choice(stateList).lower();
+      ticketSubject = f.bs();
+      ticketText = "Thank you for being so " + random.choice(adjList).lower() + ". Please " + ticketSubject.lower() + " on my " + random.choice(itemList).lower() + " because I can't use the " + f.catch_phrase().lower() + " while the " + random.choice(itemList).lower() + " is " + random.choice(stateList).lower();
       ticketContact = random.choice(companyContacts);
-      ticket = {'ticketID': ticketid, 'contact': ticketContact, 'clientID': clientid, 'client': company, 'subject': f.bs(), 'body': ticketText, 'priority': random.choice([0,1,2,3])};
+      usedCC = [];
+      for x in range(randrange(2,5)):
+        ccContact = random.choice(companyContacts);
+        if (ccContact['username'] != ticketContact['username']) and (ccContact['username'] not in usedCC):
+          usedCC.append(ccContact['username']);
+          ticketContacts.append(ccContact);
+      ticketDevice = random.choice(companyDevices);
+
+      ticket = {'ticketID': ticketid, 'author': ticketContact, 'cc': ticketContacts, 'device': ticketDevice, 'clientID': clientid, 'client': company, 'subject': ticketSubject, 'body': ticketText, 'priority': random.choice([0,1,2,3])};
       tickets.append(ticket);
 
   client = {'clientID': clientid, 'company': company, 'shortname': shortname, 'catch_phrase': f.catch_phrase(), 'keywords': f.bs(), 'domain': domain, 'phone': f.phone_number(), 'address1': f.street_address(), 'address2': f.secondary_address(), 'city': f.city(), 'state': f.state(), 'zip': f.postcode(), 'phone': f.phone_number()}
