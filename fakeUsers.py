@@ -635,12 +635,10 @@ def generateDevice(typeGroup):
   name = random.choice(typeGroup['names']);
   deviceid = deviceid + 1;
   ipaddr = ipv4()
+  hostname = shortname + '-' + name + "{0:02d}".format(t + 1);
   device = {'deviceID': deviceid, 'clientID': clientid, 'shortname': shortname, 'domain': domain,
             'typeGroupID': typeGroup['devtype_group_id'], 'typeGroupName': typeGroup['name'], 'ipAddr': ipaddr,
-            'name': shortname + '-' + name + "{0:2d}".format(t + 1)}
-  companyDevices.append(
-    {'deviceID': deviceid, 'name': shortname + '-' + name + "{0:03d}".format(t + 1), 'domain': domain, 'ipAddr': ipaddr}
-  );
+            'name': hostname}
   return device;
 
 def generateTicket():
