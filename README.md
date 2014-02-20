@@ -1,6 +1,14 @@
 fakeCRM
 =======
 
+Creates Contact, Device, Ticket and Customer information for testing ticketing, helpdesk, support, crm type applicaitons. 
+
+Creates Customers as the head item, contacts have a clientID they are associated with, then creates devices and tickets associated with those customers and contacts. 
+
+The number of contacts per customer varies, the number of devices per customer varies, and the number of tickets as well as whether or not there will be a ticket varies. 
+
+Within a ticket the status is open or acknowledged with no response or one of the later statuses with a response.
+
 ## Example Data:
 
 ### Ticket:
