@@ -15,56 +15,78 @@ clientid = 1000
 ticketid = 10000
 deviceid = 10000
 
-# https://github.com/joke2k/faker/blob/master/faker/providers/en_US/company.py
-bsWords = [
-        [
-            'implement', 'utilize', 'integrate', 'streamline', 'optimize', 'evolve', 'transform', 'embrace', 'enable',
-            'orchestrate', 'leverage', 'reinvent', 'aggregate', 'architect', 'enhance', 'incentivize', 'morph',
-            'empower', 'envisioneer', 'monetize', 'harness', 'facilitate', 'seize', 'disintermediate', 'synergize',
-            'strategize', 'deploy', 'brand', 'grow', 'target', 'syndicate', 'synthesize', 'deliver', 'mesh', 'incubate',
-            'engage', 'maximize', 'benchmark', 'expedite', 'reintermediate', 'whiteboard', 'visualize', 'repurpose',
-            'innovate', 'scale', 'unleash', 'drive', 'extend', 'engineer', 'revolutionize', 'generate', 'exploit',
-            'transition', 'e-enable', 'iterate', 'cultivate', 'matrix', 'productize', 'redefine', 'recontextualize'
-        ],
-        [
-            'clicks-and-mortar', 'value-added', 'vertical', 'proactive', 'robust', 'revolutionary', 'scalable',
-            'leading-edge', 'innovative', 'intuitive', 'strategic', 'e-business', 'mission-critical', 'sticky',
-            'one-to-one', '24/7', 'end-to-end', 'global', 'B2B', 'B2C', 'granular', 'frictionless', 'virtual', 'viral',
-            'dynamic', '24/365', 'best-of-breed', 'killer', 'magnetic', 'bleeding-edge', 'web-enabled', 'interactive',
-            'dot-com', 'sexy', 'back-end', 'real-time', 'efficient', 'front-end', 'distributed', 'seamless',
-            'extensible', 'turn-key', 'world-class', 'open-source', 'cross-platform', 'cross-media', 'synergistic',
-            'bricks-and-clicks', 'out-of-the-box', 'enterprise', 'integrated', 'impactful', 'wireless', 'transparent',
-            'next-generation', 'cutting-edge', 'user-centric', 'visionary', 'customized', 'ubiquitous', 'plug-and-play',
-            'collaborative', 'compelling', 'holistic', 'rich'
-        ],
-        [
-            'synergies', 'web-readiness', 'paradigms', 'markets', 'partnerships', 'infrastructures', 'platforms',
-            'initiatives', 'channels', 'eyeballs', 'communities', 'ROI', 'solutions', 'e-tailers', 'e-services',
-            'action-items', 'portals', 'niches', 'technologies', 'content', 'vortals', 'supply-chains', 'convergence',
-            'relationships', 'architectures', 'interfaces', 'e-markets', 'e-commerce', 'systems', 'bandwidth',
-            'infomediaries', 'models', 'mindshare', 'deliverables', 'users', 'schemas', 'networks', 'applications',
-            'metrics', 'e-business', 'functionalities', 'experiences', 'webservices', 'methodologies'
-        ]
-    ]
-
-
 itemList = [
- 'server',
- 'network',
- 'user',
- 'chicken',
- 'provider',
- 'outsourced internet',
- 'portal',
- 'system',
- 'bandwidth'
+    'server',
+    'network',
+    'user',
+    'server disk-array controller subsystem',
+    'provider',
+    'outsourced internet',
+    'portal',
+    'system',
+    'vendor',
+    'vm',
+    'hostname',
+    'beer',
+    'monitor',
+    'alert',
+    'desire',
+    'fashion model',
+    'firetruck',
+    'bandwidth'
 ]
+
 stateList = [
     'borked',
     'transferred',
     'initializing',
+    'moving',
+    'being satisfied',
+    'determined to fail',
+    'wired inconsistently',
+    'is magically delicious',
     'occupying time-space continuity blankets',
+    'somewhere over the rainbow',
+    'on the bottom of the network cabinet overlay',
+    'booting',
+    'satisfied',
+    'unavailable',
+    'moody',
+    'imposible to reach',
+    'responding to non-tangential ping apparatus',
+    'forced onto the IPv6 firewall sub-matrix panel',
+    'logging to the data-warehouse',
+    'uploading torrents',
+    'implementing the new tempation variant',
+    'roticulating splines',
+    'financed by monkey poop',
     'down'
+]
+
+adjList = [
+    'Determined',
+    'Hard-working',
+    'Diligent',
+    'Trustworthy',
+    'Motivated',
+    'Reliable',
+    'Loyal',
+    'Studious',
+    'Attentive',
+    'Conscientious',
+    'Industrious',
+    'Persistent',
+    'Dynamic',
+    'Energetic',
+    'Enterprising',
+    'Enthusiastic',
+    'Aggressive',
+    'Consistent',
+    'Organized',
+    'Professional',
+    'Methodical',
+    'Skillful',
+    'Passionate'
 ]
 
 serverSpecs = {"devtype_group_id":"1",
@@ -160,7 +182,7 @@ for i in range(560):
   if random.choice([True, False]) == True:
     for t in range(randrange(0,2)):
       ticketid = ticketid + 1;
-      ticketText = "Please " + f.bs() + " on my " + f.catch_phrase() + " because I can't " + f.catch_phrase() + " while the " + random.choice(itemList) + " is " + random.choice(stateList);
+      ticketText = "Thank you for being so " + random.choice(adjList).lower() + ". Please " + f.bs().lower() + " on my " + random.choice(itemList).lower() + " because I can't use the " + f.catch_phrase().lower() + " while the " + random.choice(itemList).lower() + " is " + random.choice(stateList).lower();
       ticketContact = random.choice(companyContacts);
       ticket = {'ticketID': ticketid, 'contact': ticketContact, 'clientID': clientid, 'client': company, 'subject': f.bs(), 'body': ticketText, 'priority': random.choice([0,1,2,3])};
       tickets.append(ticket);
