@@ -12,10 +12,11 @@ The number of contacts per customer varies, the number of devices per customer v
 Within a ticket the status is open or acknowledged with no response or one of the later statuses with a response.
 
 ## Usage:
-
+```
 git clone https://github.com/johann8384/fakeCRM
 cd fakeCRM
 python ./fakeUsers.py | more
+```
 
 ## Example Data:
 
